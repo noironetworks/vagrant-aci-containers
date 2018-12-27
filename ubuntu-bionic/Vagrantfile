@@ -1,0 +1,61 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+nodemap = [
+  {
+    :name => "vk8s-master",
+    :roles => "master",
+    :box => "ubuntu/bionic64",
+    :cpus => "2",
+    :mem => "2048",
+    :ip => "1.100.201.11"
+  },
+  {
+    :name => "vk8s-node1",
+    :roles => "node",
+    :box => "ubuntu/bionic64",
+    :cpus => "2",
+    :mem => "2048",
+    :ip => "1.100.201.12"
+  },
+  {
+    :name => "vk8s-node2",
+    :roles => "node",
+    :box => "ubuntu/bionic64",
+    :cpus => "2",
+    :mem => "2048",
+    :ip => "1.100.201.13"
+  }
+]
+
+master_ip = '1.100.201.11'
+pod_network_cidr = '10.2.176.1/21'
+
+Vagrant.configure("2") do |config|
+  nodemap.each do |node|
+    config.vm.define node[:name] do |config|
+
+      config.vm.hostname = node[:name]
+      config.vm.box = node[:box]
+      config.vm.box_check_update  = false
+      config.vm.synced_folder "/tmp", "/mnt/tmp"
+      config.vm.network :private_network, ip: node[:ip]
+
+      config.vm.provider 'virtualbox' do |vb|
+        vb.linked_clone = true
+        vb.name = node[:name]
+        vb.memory = node[:mem].to_i
+        vb.cpus = node[:cpus].to_i
+      end   
+
+      config.vm.provision 'shell', path: 'provision_base.sh'
+     
+      if node[:roles] == "master"
+        config.vm.provision 'shell', path: 'provision_master.sh', args: [pod_network_cidr]
+      else
+        config.vm.provision 'shell', path: 'provision_node.sh', args: [master_ip]
+      end
+
+    end
+  end
+end
