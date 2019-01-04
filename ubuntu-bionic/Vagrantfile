@@ -6,8 +6,8 @@ nodemap = [
     :name => "vk8s-master",
     :roles => "master",
     :box => "ubuntu/bionic64",
-    :cpus => "2",
-    :mem => "2048",
+    :cpus => "8",
+    :mem => "32768",
     :ip => "1.100.201.11"
   },
   {
@@ -47,6 +47,10 @@ Vagrant.configure("2") do |config|
         vb.memory = node[:mem].to_i
         vb.cpus = node[:cpus].to_i
       end   
+
+      if ENV['PROVISION_CISCO']
+        config.vm.provision 'shell', path: 'provision_cisco.sh'
+      end
 
       config.vm.provision 'shell', path: 'provision_base.sh'
      
