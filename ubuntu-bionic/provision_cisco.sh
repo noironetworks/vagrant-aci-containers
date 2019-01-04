@@ -2,6 +2,7 @@
 
 # Provision for Cisco lab environment
 
+HOST_NAME=$(hostname -s)
 echo "Provisioning for Cisco lab environment inside node $HOST_NAME"
 
 # Lab proxy
@@ -12,10 +13,17 @@ no_proxy=localhost,127.0.0.1,172.28.184.8,172.28.184.14,172.28.184.18,vk8s-maste
 EOF
 
 # DNS resolution
+systemctl disable systemd-resolved.service
+systemctl stop systemd-resolved
+# Remove the symlink
+rm /etc/resolv.conf
 cat <<EOF >/etc/resolv.conf
 nameserver 172.28.184.18
 search noiro.lab
 EOF
+# Make it immutable
+chattr -e /etc/resolv.conf
+chattr +i /etc/resolv.conf
 
 # Docker specific stuff
 mkdir -p /etc/systemd/system/docker.service.d
