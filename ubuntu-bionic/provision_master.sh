@@ -21,5 +21,6 @@ chmod +x /bin/kubeadm_join.sh
 
 export KUBECONFIG=/etc/kubernetes/admin.conf
 echo "Configuring aci cni"
+kubectl apply -f /home/vagrant/data/aci_deployment.yaml
 
 echo "Done provisioning $HOST_NAME"
