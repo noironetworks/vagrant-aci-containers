@@ -11,7 +11,7 @@ data:
     {
         "log-level": "debug",
         "apic-hosts": [
-            "172.28.184.172"
+            "127.0.0.1"
         ],
         "apic-username": "vk8s_1",
         "apic-private-key-path": "/usr/local/etc/aci-cert/user.key",
@@ -471,6 +471,10 @@ spec:
         - operator: Exists
           effect: NoSchedule
       containers:
+        - name: aci-moserver
+          image: jojimt/moserver:latest
+          imagePullPolicy: Always
+
         - name: aci-containers-controller
           image: challa/aci-containers-controller:latest
           imagePullPolicy: Always
