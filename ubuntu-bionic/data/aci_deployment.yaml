@@ -145,12 +145,14 @@ rules:
   - nodes
   - namespaces
   - pods
+  - pods/exec
   - endpoints
   - services
   verbs:
-  - list
-  - watch
-  - get
+  - '*'
+# - list
+# - watch
+# - get
 - apiGroups:
   - "networking.k8s.io"
   resources:
@@ -165,17 +167,20 @@ rules:
   - deployments
   - replicasets
   verbs:
-  - list
-  - watch
-  - get
+  - '*'
+# - list
+# - watch
+# - get
 - apiGroups:
   - ""
   resources:
   - pods
+  - pods/exec
   - nodes
   - services/status
   verbs:
-  - update
+# - update
+  - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -473,8 +478,11 @@ spec:
           effect: NoSchedule
       containers:
         - name: aci-gbpserver
-          image: jojimt/gbpserver:latest
+          image: jojimt/gbpserver
           imagePullPolicy: Always
+          volumeMounts:
+            - name: kubeconfig
+              mountPath: /kube
 
         - name: aci-containers-controller
           image: challa/aci-containers-controller:latest
@@ -489,6 +497,9 @@ spec:
               path: /status
               port: 8091
       volumes:
+        - name: kubeconfig
+          hostPath:
+            path: /kubeconfig
         - name: aci-user-cert-volume
           secret:
             secretName: aci-user-cert

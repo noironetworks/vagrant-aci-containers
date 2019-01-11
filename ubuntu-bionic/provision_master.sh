@@ -20,6 +20,11 @@ kubeadm token create --print-join-command >> /bin/kubeadm_join.sh
 chmod +x /bin/kubeadm_join.sh
 
 export KUBECONFIG=/etc/kubernetes/admin.conf
+
+sudo mkdir -p /kubeconfig
+sudo chmod 777 /kubeconfig
+kubectl config view > /kubeconfig/kube.yaml
+
 echo "Configuring aci cni"
 kubectl apply -f /home/vagrant/data/aci_deployment.yaml
 
