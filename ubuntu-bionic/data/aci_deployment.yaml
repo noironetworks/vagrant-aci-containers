@@ -81,6 +81,7 @@ data:
         "service-vlan": 1022,
         "encap-type": "vxlan",
         "aci-infra-vlan": 4093,
+        "registry-url": "http://1.100.201.11:14443",
         "cni-netconfig": [
             {
                 "gateway": "10.2.176.1",
@@ -258,7 +259,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: aci-containers-host
-          image: challa/aci-containers-host:latest
+          image: jojimt/aci-containers-host
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -471,8 +472,8 @@ spec:
         - operator: Exists
           effect: NoSchedule
       containers:
-        - name: aci-moserver
-          image: jojimt/moserver:latest
+        - name: aci-gbpserver
+          image: jojimt/gbpserver:latest
           imagePullPolicy: Always
 
         - name: aci-containers-controller
