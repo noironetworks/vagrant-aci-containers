@@ -32,12 +32,12 @@ data:
         ],
         "aci-vrf": "l3out_v1_vrf",
         "default-endpoint-group": {
-            "policy-space": "vk8s_1",
+            "policy-space": "kube",
             "name": "kubernetes|kube-default"
         },
         "namespace-default-endpoint-group": {
             "kube-system": {
-                "policy-space": "vk8s_1",
+                "policy-space": "kube",
                 "name": "kubernetes|kube-system"
             }
         },
