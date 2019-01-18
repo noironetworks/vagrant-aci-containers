@@ -43,31 +43,31 @@ data:
         },
         "service-ip-pool": [
             {
-                "end": "10.3.183.254",
-                "start": "10.3.176.2"
+                "end": "10.3.63.254",
+                "start": "10.3.56.2"
             }
         ],
         "static-service-ip-pool": [
             {
-                "end": "10.4.183.254",
-                "start": "10.4.176.2"
+                "end": "10.4.63.254",
+                "start": "10.4.56.2"
             }
         ],
         "pod-ip-pool": [
             {
-                "end": "10.2.183.254",
-                "start": "10.2.176.2"
+                "end": "10.2.63.254",
+                "start": "10.2.56.2"
             }
         ],
         "pod-subnet-chunk-size": 32,
         "node-service-ip-pool": [
             {
-                "end": "10.5.183.254",
-                "start": "10.5.176.2"
+                "end": "10.5.63.254",
+                "start": "10.5.56.2"
             }
         ],
         "node-service-subnets": [
-            "10.5.176.1/21"
+            "10.5.56.1/21"
         ]
     }
   host-agent-config: |-
@@ -84,14 +84,14 @@ data:
         "registry-url": "http://1.100.201.11:14443",
         "cni-netconfig": [
             {
-                "gateway": "10.2.176.1",
+                "gateway": "10.2.56.1",
                 "routes": [
                     {
                         "dst": "0.0.0.0/0",
-                        "gw": "10.2.176.1"
+                        "gw": "10.2.56.1"
                     }
                 ],
-                "subnet": "10.2.176.0/21"
+                "subnet": "10.2.56.0/21"
             }
         ]
     }
