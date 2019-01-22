@@ -509,3 +509,6 @@ spec:
             items:
               - key: controller-config
                 path: controller.conf
+# Uncomment to pin
+#      nodeSelector:
+#        gbpregistry: "yes"
