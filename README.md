@@ -1,19 +1,18 @@
 # vagrant-aci-containers
-###### Vagrant box for aci containers
+**A vagrant environment for opflex based kubernetes install**
 
-> If you have an existing vagrant environment
+1. If you have not used vagrant before, please set it up first. On an ubuntu VM, you can set one up as follows
 ```
-cd vagrant-aci-containers/ubuntu-bionic
-vagrant up
+sudo apt-get update
+sudo apt-get install git virtualbox vagrant
 ```
-
-> If you are running it in a Cisco lab environment use, set the following environment variable before doing vagrant up
+2. If you are running this code in a Cisco lab environment use, set the following environment variable (to set proxies)
 ```
 export PROVISION_CISCO=true
 ```
-
-> If you have not used vagrant before, you can set one up on an ubuntu VM as follows
-```sudo apt-get update
-sudo apt-get install git virtualbox vagrant
-vagrant init ubuntu/xenial64
+3. Now clone the repo and run vagrant as
+```
+git clone https://github.com/noironetworks/vagrant-aci-containers.git
+cd vagrant-aci-containers/ubuntu-bionic
+vagrant up
 ```
