@@ -28,4 +28,10 @@ kubectl config view > /kubeconfig/kube.yaml
 echo "Configuring aci cni"
 kubectl apply -f /home/vagrant/data/aci_deployment.yaml
 
+echo "Changing kube-proxy to use 1.100.201.0/24 subnet for NODE_PORT masquerade"
+kubectl get daemonset kube-proxy -n kube-system  -o yaml > /tmp/kp.yaml
+kubectl delete -f /tmp/kp.yaml
+sed -i '/.*hostname-override.*/a\ \ \ \ \ \ \ \ - --nodeport-addresses=1.100.201.0/24' kp.yaml
+kubectl apply -f /tmp/kp.yaml
+
 echo "Done provisioning $HOST_NAME"
