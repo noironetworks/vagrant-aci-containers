@@ -5,6 +5,7 @@
 ```
 sudo apt-get update
 sudo apt-get install git virtualbox vagrant
+sudo usermod -aG vboxusers `whoami`
 ```
 2. If you are running this code in a Cisco lab environment use, set the following environment variable (to set proxies)
 ```
