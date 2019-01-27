@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
       config.vm.provision 'shell', path: 'provision_base.sh'
      
       if node[:roles] == "master"
-        config.vm.provision 'shell', path: 'provision_master.sh', args: [pod_network_cidr]
+        config.vm.provision 'shell', path: 'provision_master.sh', args: [pod_network_cidr, num_nodes]
       else
         config.vm.provision 'shell', path: 'provision_node.sh', args: [master_ip]
       end
