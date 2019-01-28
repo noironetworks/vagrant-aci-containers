@@ -6,9 +6,6 @@ HOST_NAME=$(hostname -s)
 
 echo "Executing inside node $HOST_NAME"
 
-echo "Installing sshpass"
-apt-get install -y sshpass
-
 echo "Copy kubeadm join command from master"
 sshpass -p "vagrant" scp -o StrictHostKeyChecking=no vagrant@$MASTER_IP:/bin/kubeadm_join.sh .
 

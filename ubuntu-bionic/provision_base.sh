@@ -5,6 +5,9 @@ HOST_NAME=$(hostname -s)
 
 echo "Executing inside node $HOST_NAME"
 
+echo "Installing sshpass"
+apt-get install -y sshpass
+
 echo "Installing docker 18.06"
 apt-get update
 apt-get install -y docker.io
