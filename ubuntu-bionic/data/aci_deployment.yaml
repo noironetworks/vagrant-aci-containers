@@ -264,7 +264,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: aci-containers-host
-          image: jojimt/aci-containers-host
+          image: challa/aci-containers-host:final
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -296,7 +296,7 @@ spec:
               path: /status
               port: 8090
         - name: opflex-agent
-          image: challa/opflex:latest
+          image: challa/opflex:final
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -314,7 +314,7 @@ spec:
             - name: opflex-config-volume
               mountPath: /usr/local/etc/opflex-agent-ovs/conf.d
         - name: opflex-server
-          image: challa/opflexserver:latest
+          image: challa/opflexserver:final
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -328,7 +328,7 @@ spec:
             - name: opflex-server-config-volume
               mountPath: /usr/local/etc/opflex-server
         - name: mcast-daemon
-          image: challa/opflex:latest
+          image: challa/opflex:final
           command: ["/bin/sh"]
           args: ["/usr/local/bin/launch-mcastdaemon.sh"]
           imagePullPolicy: Always
@@ -402,7 +402,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: aci-containers-openvswitch
-          image: challa/openvswitch:latest
+          image: challa/openvswitch:final
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -478,14 +478,14 @@ spec:
           effect: NoSchedule
       containers:
         - name: aci-gbpserver
-          image: jojimt/gbpserver
+          image: jojimt/gbpserver:debug
           imagePullPolicy: Always
           volumeMounts:
             - name: kubeconfig
               mountPath: /kube
 
         - name: aci-containers-controller
-          image: challa/aci-containers-controller:latest
+          image: challa/aci-containers-controller:final
           imagePullPolicy: Always
           volumeMounts:
             - name: controller-config-volume
