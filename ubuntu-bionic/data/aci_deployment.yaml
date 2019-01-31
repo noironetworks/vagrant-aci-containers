@@ -81,7 +81,7 @@ data:
         "service-vlan": 1022,
         "encap-type": "vxlan",
         "aci-infra-vlan": 4093,
-        "registry-url": "http://1.100.201.11:14443",
+        "registry-url": "http://10.96.0.2:14443",
         "cni-netconfig": [
             {
                 "gateway": "10.2.56.1",
@@ -509,6 +509,19 @@ spec:
             items:
               - key: controller-config
                 path: controller.conf
-# Uncomment to pin
-#      nodeSelector:
-#        gbpregistry: "yes"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ep-registry
+  namespace: kube-system
+  labels:
+    app: gbpserver
+spec:
+  clusterIP: 10.96.0.2
+  ports:
+  - port: 14443
+    targetPort: 14443
+  selector:
+    name: aci-containers-controller
+
