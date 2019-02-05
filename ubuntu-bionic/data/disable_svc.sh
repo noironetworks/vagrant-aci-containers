@@ -1,9 +1,7 @@
 #!/bin/bash
 
 MASTER_IP=1.100.201.11
-NUM_NODES=$1
-
-[ -z "$NUM_NODES" ] && NUM_NODES=2
+NUM_NODES=$(cat ./num_nodes)
 
 nextip ()
 {

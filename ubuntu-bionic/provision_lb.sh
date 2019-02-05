@@ -14,6 +14,7 @@ sudo sysctl -w net.ipv4.fib_multipath_hash_policy=1
 sudo echo "net.ipv4.fib_multipath_hash_policy=1" >> /etc/sysctl.conf 
 sudo sysctl -w net.ipv4.fib_multipath_use_neigh=1
 sudo echo "net.ipv4.fib_multipath_use_neigh=1" >> /etc/sysctl.conf 
+echo $NUM_NODES > $HOME/data/num_nodes
 
 nextip ()
 {
